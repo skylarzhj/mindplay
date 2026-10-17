@@ -2,6 +2,7 @@ import {describe,it,expect} from 'vitest';
 import {createHorses,raceHorses,relations,evaluatePodium,placeHorse} from './engine';
 describe('25 horse brain teaser',()=>{
  it('creates 25 unique horses with fixed distinct speeds',()=>{const h=createHorses(()=>.3);expect(new Set(h.map(x=>x.rank)).size).toBe(25);expect(new Set(h.map(x=>x.id)).size).toBe(25);const a=raceHorses(h,[0,1,2,3,4]);expect(raceHorses(h,[4,3,2,1,0])).toEqual(a);});
+ it('shuffles coats separately while preserving all five coat counts',()=>{let n=42;const h=createHorses(()=>{n=(n*1664525+1013904223)>>>0;return n/4294967296;});for(const coat of new Set(h.map(x=>x.coat)))expect(h.filter(x=>x.coat===coat)).toHaveLength(5);expect(h.map(x=>x.coat)).not.toEqual(h.map((_,i)=>h[Math.floor(i/5)*5].coat));expect(h.slice(0,5).some(x=>x.coat!==h[0].coat)).toBe(true);});
  it('enforces five lanes and rejects duplicate racers',()=>{const h=createHorses();expect(()=>raceHorses(h,[0,0])).toThrow();expect(()=>raceHorses(h,[0])).toThrow();expect(()=>raceHorses(h,[0,1,2,3,4,5])).toThrow();});
  it('moves horses between lanes without duplicates',()=>{expect(placeHorse([0,1,null,null,null],0,2)).toEqual([null,1,0,null,null]);expect(placeHorse([0,1,null,null,null],2,1)).toEqual([0,2,null,null,null]);});
  it('deduces only observed transitive relationships',()=>{const b=relations([{order:[0,1,2]},{order:[2,3,4]}]);expect([...b[4]].sort()).toEqual([0,1,2,3]);expect(b[5].size).toBe(0);});

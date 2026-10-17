@@ -1,7 +1,13 @@
 export interface Horse {id:number;name:string;coat:string;rank:number;}
 export interface Race {order:number[];}
 export const COATS=['#98694f','#c39a66','#75657d','#546f76','#b17b72'];
-export function createHorses(random:()=>number=Math.random):Horse[]{const ranks=Array.from({length:25},(_,i)=>i);for(let i=24;i>0;i--){const j=Math.floor(random()*(i+1));[ranks[i],ranks[j]]=[ranks[j],ranks[i]];}return ranks.map((rank,id)=>({id,name:`Horse ${String(id+1).padStart(2,'0')}`,coat:COATS[Math.floor(id/5)],rank}));}
+export function createHorses(random:()=>number=Math.random):Horse[]{
+ const ranks=Array.from({length:25},(_,i)=>i),coats=Array.from({length:25},(_,i)=>COATS[i%COATS.length]);
+ for(let i=24;i>0;i--){const j=Math.floor(random()*(i+1));[ranks[i],ranks[j]]=[ranks[j],ranks[i]];}
+ // An independent shuffle keeps every coat equally represented without linking it to speed or horse number.
+ for(let i=24;i>0;i--){const j=Math.floor(random()*(i+1));[coats[i],coats[j]]=[coats[j],coats[i]];}
+ return ranks.map((rank,id)=>({id,name:`Horse ${String(id+1).padStart(2,'0')}`,coat:coats[id],rank}));
+}
 export function raceHorses(horses:Horse[],ids:number[]):Race{if(ids.length<2||ids.length>5||new Set(ids).size!==ids.length||ids.some(id=>!horses.some(h=>h.id===id)))throw Error('Choose 2–5 different horses.');return {order:[...ids].sort((a,b)=>horses.find(h=>h.id===a)!.rank-horses.find(h=>h.id===b)!.rank)};}
 export function placeHorse(lanes:(number|null)[],horse:number,lane:number){if(lane<0||lane>=5||horse<0||horse>=25)throw Error('Invalid lane or horse.');const next=lanes.map(id=>id===horse?null:id);next[lane]=horse;return next;}
 export function relations(races:Race[]){const before=Array.from({length:25},()=>new Set<number>());for(const race of races)for(let i=0;i<race.order.length;i++)for(let j=i+1;j<race.order.length;j++)before[race.order[j]].add(race.order[i]);let changed=true;while(changed){changed=false;for(const set of before)for(const id of [...set])for(const ancestor of before[id])if(!set.has(ancestor)){set.add(ancestor);changed=true;}}return before;}
