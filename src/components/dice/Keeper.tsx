@@ -1,0 +1,2 @@
+import {motion} from 'framer-motion';
+export function Keeper({children}:{children:React.ReactNode}){return <motion.div className="keeper" initial={{opacity:0,y:8}} animate={{opacity:1,y:0}}><div className="keeper-portrait" aria-hidden="true"><span>✦</span><i/><b>◡</b></div><div className="keeper-speech"><span className="step-label">THE ISLAND KEEPER</span><div aria-live="polite">{children}</div></div></motion.div>}

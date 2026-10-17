@@ -28,8 +28,8 @@ npm run preview # serve the production build locally
 - Play: select a die, animated independent rolls, round results, wins/losses/ties, win rate, change die, reset, and an investigation prompt after three rounds.
 - Explore: record a hypothesis, compare any dice, simulate 10–10,000 rounds, inspect real counts and a Recharts convergence graph, then reveal the exact pairwise matrix and nontransitive cycle.
 - Quant: interactive 36-outcome grid, exact win probability, expected values, best-response strategy, and an accessible explanation of the law of large numbers.
-- Chapters unlock in order: complete three Play rounds to unlock Explore; simulate all three distinct matchups to unlock Quant. Locked chapters cannot be opened. The field journal records your first die, hunch, completed experiments, discovery, and strategy rounds.
-- Quant includes real first-choice versus second-choice strategy battles. The computer commits before you pick in the second-choice condition; each order keeps separate empirical results.
+- The keeper-led adventure starts with one clear choice: pick a die. After any completed duel, players can duel again, switch dice, or look closer. No repeated-round quota is imposed. Watching all three distinct matchups reveals the cycle and opens the keeper-first strategy challenge. Locked chapters cannot be skipped; previously visited scenes remain available through the secondary adventure map. The field journal records your first die, hunch, completed experiments, discovery, and strategy rounds.
+- Quant includes real first-choice versus second-choice strategy battles (starting with the computer choosing first). The computer commits before you pick in the second-choice condition; each order keeps separate empirical results.
 - Mode state stays intact while switching tabs. Returning to the world map starts a fresh game. There is no account, database, AI, or backend. All computation happens in the browser.
 
 ## Modules and team boundaries

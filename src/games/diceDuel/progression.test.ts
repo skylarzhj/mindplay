@@ -7,7 +7,7 @@ import {calculateWinProbability} from './probability';
 const experiment=(a:number,b:number):Experiment=>({hypothesis:'ruby',result:simulateMatches(DICE[a],DICE[b],10,()=>.1)});
 describe('ordered discovery progression',()=>{
  it('starts with only Play accessible',()=>{expect(canEnterMode('play',initialJourney)).toBe(true);expect(canEnterMode('explore',initialJourney)).toBe(false);expect(canEnterMode('quant',initialJourney)).toBe(false);});
- it('requires three completed rounds to unlock Explore',()=>{expect(canEnterMode('explore',{...initialJourney,rounds:2})).toBe(false);expect(canEnterMode('explore',{...initialJourney,rounds:3})).toBe(true);});
+ it('opens investigation after the first completed duel, without a repeated-round quota',()=>{expect(canEnterMode('explore',{...initialJourney,rounds:0})).toBe(false);expect(canEnterMode('explore',{...initialJourney,rounds:1})).toBe(true);});
  it('does not count reversed pairs or self-comparisons as new evidence',()=>{expect(testedPairs([experiment(0,1),experiment(1,0),experiment(0,0)]).size).toBe(1);expect(canEnterMode('quant',{...initialJourney,rounds:3,experiments:[experiment(0,1)]})).toBe(false);});
  it('unlocks Quant only after Play and all three distinct matchups',()=>{const experiments=[experiment(0,1),experiment(1,2),experiment(2,0)];expect(canEnterMode('quant',{...initialJourney,experiments})).toBe(false);expect(canEnterMode('quant',{...initialJourney,rounds:3,experiments})).toBe(true);});
 });

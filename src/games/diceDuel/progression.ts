@@ -1,5 +1,5 @@
 import type {DieId,Mode,SimulationResult} from '../../types';
-export const REQUIRED_PLAY_ROUNDS=3;
+export const REQUIRED_PLAY_ROUNDS=1;
 export type Hypothesis=DieId|'none';
 export interface Experiment {result:SimulationResult;hypothesis:Hypothesis;}
 export interface JourneyState {firstDie:DieId|null;rounds:number;wins:number;hypothesis:Hypothesis|null;experiments:Experiment[];strategyRounds:number;}

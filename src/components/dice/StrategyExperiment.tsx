@@ -9,7 +9,7 @@ import {ArrowRight,RotateCcw} from '../ui/Icons';
 type OrderStats={rounds:number;wins:number;ties:number};
 const empty:OrderStats={rounds:0,wins:0,ties:0};
 export function StrategyExperiment({onRound}:{onRound:()=>void}){
- const [order,setOrder]=useState<ChoiceOrder>('player-first'),[committed,setCommitted]=useState<Die>(()=>commitOpponent()),[player,setPlayer]=useState<Die|null>(null),[result,setResult]=useState<MatchResult|null>(null),[rolling,setRolling]=useState(false),[hint,setHint]=useState(false),[records,setRecords]=useState<Record<ChoiceOrder,OrderStats>>({'player-first':{...empty},'computer-first':{...empty}});
+ const [order,setOrder]=useState<ChoiceOrder>('computer-first'),[committed,setCommitted]=useState<Die>(()=>commitOpponent()),[player,setPlayer]=useState<Die|null>(null),[result,setResult]=useState<MatchResult|null>(null),[rolling,setRolling]=useState(false),[hint,setHint]=useState(false),[records,setRecords]=useState<Record<ChoiceOrder,OrderStats>>({'player-first':{...empty},'computer-first':{...empty}});
  const timer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);useEffect(()=>()=>clearTimeout(timer.current),[]);
  const opponent=player?makeMatchup(player,order,committed).opponent:order==='computer-first'?committed:null;
  function start(next:ChoiceOrder){clearTimeout(timer.current);setOrder(next);setCommitted(commitOpponent());setPlayer(null);setResult(null);setHint(false);setRolling(false);}
