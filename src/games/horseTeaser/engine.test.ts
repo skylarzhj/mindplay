@@ -1,0 +1,10 @@
+import {describe,it,expect} from 'vitest';
+import {createHorses,raceHorses,relations,evaluatePodium,placeHorse} from './engine';
+describe('25 horse brain teaser',()=>{
+ it('creates 25 unique horses with fixed distinct speeds',()=>{const h=createHorses(()=>.3);expect(new Set(h.map(x=>x.rank)).size).toBe(25);expect(new Set(h.map(x=>x.id)).size).toBe(25);const a=raceHorses(h,[0,1,2,3,4]);expect(raceHorses(h,[4,3,2,1,0])).toEqual(a);});
+ it('enforces five lanes and rejects duplicate racers',()=>{const h=createHorses();expect(()=>raceHorses(h,[0,0])).toThrow();expect(()=>raceHorses(h,[0])).toThrow();expect(()=>raceHorses(h,[0,1,2,3,4,5])).toThrow();});
+ it('moves horses between lanes without duplicates',()=>{expect(placeHorse([0,1,null,null,null],0,2)).toEqual([null,1,0,null,null]);expect(placeHorse([0,1,null,null,null],2,1)).toEqual([0,2,null,null,null]);});
+ it('deduces only observed transitive relationships',()=>{const b=relations([{order:[0,1,2]},{order:[2,3,4]}]);expect([...b[4]].sort()).toEqual([0,1,2,3]);expect(b[5].size).toBe(0);});
+ it('distinguishes a lucky correct guess from a proven answer',()=>{const h=createHorses();const top=[...h].sort((a,b)=>a.rank-b.rank).slice(0,3).map(x=>x.id);expect(evaluatePodium(h,[],top)).toEqual({correct:true,proven:false});});
+ it('verifies the classic seven-race solution for many hidden speed orders',()=>{for(let seed=1;seed<=30;seed++){let n=seed;const h=createHorses(()=>{n=(n*1664525+1013904223)>>>0;return n/4294967296;});const races=Array.from({length:5},(_,i)=>raceHorses(h,[0,1,2,3,4].map(x=>i*5+x)));const winners=raceHorses(h,races.map(r=>r.order[0]));races.push(winners);const groups=winners.order.map(w=>races.slice(0,5).find(r=>r.order[0]===w)!);const final=raceHorses(h,[groups[0].order[1],groups[0].order[2],groups[1].order[0],groups[1].order[1],groups[2].order[0]]);races.push(final);expect(evaluatePodium(h,races,[winners.order[0],...final.order.slice(0,2)])).toEqual({correct:true,proven:true});expect(races.length).toBe(7);}});
+});

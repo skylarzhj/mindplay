@@ -32,6 +32,10 @@ npm run preview # serve the production build locally
 - Quant includes real first-choice versus second-choice strategy battles (starting with the computer choosing first). The computer commits before you pick in the second-choice condition; each order keeps separate empirical results.
 - Mode state stays intact while switching tabs. Returning to the world map starts a fresh game. There is no account, database, AI, or backend. All computation happens in the browser.
 
+## Brain Teaser: The Royal Races
+
+A second playable stage, accessible beneath the homepage world map: 25 draggable horses, five lanes, actual deterministic races, a notebook, evidence-based deductions, progressive hints, and a ranked top-three submission. Pointer dragging, touch/click selection, and keyboard placement are supported. See [rules and mathematical verification](docs/royal-races.md). The engine lives in `src/games/horseTeaser/`; the reusable horse artwork is `src/components/horses/HorseGlyph.tsx`; the scene is `src/pages/HorseTeaser.tsx`.
+
 ## Modules and team boundaries
 
 ```text
