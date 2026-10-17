@@ -24,7 +24,7 @@ npm run preview # serve the production build locally
 
 ## What works
 
-- A responsive discovery map with four worlds; Curious Island opens Dice Duel. Future worlds are visibly disabled.
+- A responsive discovery map with five worlds; Curious Island opens Dice Duel. Brain Teaser Island opens The Royal Races; future worlds are visibly disabled.
 - Play: select a die, animated independent rolls, round results, wins/losses/ties, win rate, change die, reset, and an investigation prompt after three rounds.
 - Explore: record a hypothesis, compare any dice, simulate 10–10,000 rounds, inspect real counts and a Recharts convergence graph, then reveal the exact pairwise matrix and nontransitive cycle.
 - Quant: interactive 36-outcome grid, exact win probability, expected values, best-response strategy, and an accessible explanation of the law of large numbers.
@@ -34,7 +34,7 @@ npm run preview # serve the production build locally
 
 ## Brain Teaser: The Royal Races
 
-A second playable stage, accessible beneath the homepage world map: 25 draggable horses, five lanes, actual deterministic races, a notebook, evidence-based deductions, progressive hints, and a ranked top-three submission. Pointer dragging, touch/click selection, and keyboard placement are supported. See [rules and mathematical verification](docs/royal-races.md). The engine lives in `src/games/horseTeaser/`; the reusable horse artwork is `src/components/horses/HorseGlyph.tsx`; the scene is `src/pages/HorseTeaser.tsx`.
+A second playable stage, accessible as Stage 02, Brain Teaser Island, directly on the floating world map: 25 draggable horses, five lanes, actual deterministic races, a notebook, evidence-based deductions, progressive hints, and a ranked top-three submission. Pointer dragging, touch/click selection, and keyboard placement are supported. See [rules and mathematical verification](docs/royal-races.md). The engine lives in `src/games/horseTeaser/`; the reusable horse artwork is `src/components/horses/HorseGlyph.tsx`; the scene is `src/pages/HorseTeaser.tsx`.
 
 ## Modules and team boundaries
 
@@ -76,3 +76,7 @@ Pastel skies, hand-painted floating islands, live parchment labels, ivory dice, 
 Artwork is bundled locally in `public/art/world-islands.png`; all text and controls remain responsive HTML rather than baked-in image labels. World components live in `src/components/worlds/`, with a separate `src/styles/fantasy.css` presentation layer. Framer Motion and CSS respect reduced-motion preferences. No external image or font services are needed at runtime.
 
 See [art direction and generation prompts](docs/art-direction.md) for the artwork provenance and visual implementation notes.
+
+## Stage characters
+
+Orin, the star-robed Curious Island keeper, and Captain Rowan, the race marshal, have distinct SVG character designs, dialogue colors, costumes, and scenery. They blink and speak, wave when clicked, and react to live gameplay states (choice, roll/race, hints, and success). Motion respects reduced-motion preferences. `Keeper.tsx` accepts a character variant and a typed mood so new stages can reuse the animation system with their own persona.

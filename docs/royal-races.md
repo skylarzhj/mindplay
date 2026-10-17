@@ -1,6 +1,6 @@
 # Brain Teaser · The Royal Races
 
-Open from the Brain Teaser invitation beneath the home world map.
+Open Stage 02, Brain Teaser Island, directly on the floating world map. Captain Rowan is the stage-specific animated race marshal.
 
 ## Rules and interactions
 
