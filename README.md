@@ -65,4 +65,8 @@ Simulation uses independent `Math.random()` samples for both dice and stores at 
 
 ## Design
 
-Midnight colors, original CSS floating-island art, softly glowing dice, responsive cards and accessible native controls. Framer Motion respects reduced-motion preferences; CSS ambient animation is disabled for reduced motion. No external images or font services are required.
+Pastel skies, hand-painted floating islands, live parchment labels, ivory dice, a stone arena, and matching experiment workshop and research room. The Curious Island is interactive; the other worlds are visibly locked. The lucky-dice interaction samples a fair die and offers the currently available adventure. How It Works and About open native modal field guides.
+
+Artwork is bundled locally in `public/art/world-islands.png`; all text and controls remain responsive HTML rather than baked-in image labels. World components live in `src/components/worlds/`, with a separate `src/styles/fantasy.css` presentation layer. Framer Motion and CSS respect reduced-motion preferences. No external image or font services are needed at runtime.
+
+See [art direction and generation prompts](docs/art-direction.md) for the artwork provenance and visual implementation notes.
