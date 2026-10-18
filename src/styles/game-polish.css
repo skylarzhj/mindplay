@@ -1,0 +1,81 @@
+/* Shared navigation and readable racing controls; no game rules change. */
+.scene-duel .header-play,.scene-horses .header-play{display:none}
+.storybook-header nav button{min-height:44px}
+.horse-page.story-races .game-breadcrumb{font-size:12px;flex-wrap:wrap}
+.horse-page.story-races .game-title .eyebrow{font-size:11px;letter-spacing:1px}
+.horse-page.story-races .game-title p{font-size:16px}
+.horse-page.story-races .step-label{font-size:11px;letter-spacing:.6px;color:#647450}
+.horse-page.story-races .keeper-speech p{font-size:18px;color:#465c47}
+.horse-page.story-races .keeper-speech>.step-label{font-size:11px}
+.horse-page.story-races .text-button{font-size:13px;min-height:44px}
+.horse-page.story-races .race-stage-tools{margin:0 0 12px;gap:20px}
+.horse-page.story-races .race-stage-tools .text-button{color:#705779}
+.horse-page.story-races .race-progress>span{font-size:11px;letter-spacing:.5px}
+.horse-page.story-races .race-progress small{font-size:11px;color:#71614e}
+.horse-page.story-races .paddock-title .step-label{display:block;font-size:10px;line-height:1.4}
+.horse-page.story-races .all-horse-paddock h2{margin:4px 0 0}
+.horse-page.story-races .paddock-horse .horse-glyph{height:28px}
+.horse-page.story-races .paddock-total{font-size:11px;color:#68734f}
+.horse-page.story-races .all-horse-grid{gap:7px}
+.horse-page.story-races .paddock-horse{min-height:68px;padding-top:4px;padding-bottom:3px}
+.horse-page.story-races .paddock-horse-number{font-size:14px;color:#694a66}
+.horse-page.story-races .paddock-horse-status{font-size:10px;color:#75604d}
+.horse-page.story-races .paddock-horse-status.assigned{color:#385a38}
+.horse-page.story-races .paddock-instruction{font-size:13px;color:#615568}
+.horse-page.story-races .paddock-footnote{font-size:11px;color:#76664f}
+.horse-page.story-races .lineup-count{font-size:11px;color:#52653d;padding:8px}
+.horse-page.story-races .central-racecourse h2{font-size:24px;max-width:none}
+.horse-page.story-races .central-racecourse .race-lane{height:58px}
+.horse-page.story-races .central-racecourse .empty-lane{font-size:12px;top:24px;color:#506741;letter-spacing:0}
+.horse-page.story-races .race-track-labels{font-size:10px;color:#66734d;letter-spacing:1px}
+.horse-page.story-races .runner-number{font-size:10px;bottom:-4px}
+.horse-page.story-races .central-racecourse .finish-rank{font-size:13px;color:#42572f}
+.horse-page.story-races .race-control-bar{display:block}
+.horse-page.story-races .race-control-bar>div>p{font-size:13px;color:#526045}
+.horse-page.story-races .race-control-bar>div>span{font-size:11px;color:#74654f;max-width:none}
+.horse-page.story-races .start-race{font-size:15px;min-height:46px;width:100%;margin-top:6px}
+.horse-page.story-races .race-utilities{flex-wrap:wrap}
+.horse-page.story-races .journey-strip-heading>span,.horse-page.story-races .journey-race-index{font-size:11px;color:#7c5877}
+.horse-page.story-races .journey-waiting{color:#796579}
+.horse-page.story-races .race-journal h2 small{font-size:12px;color:#71616f}
+.horse-page.story-races .journal-open-label{font-size:12px;color:#756176}
+.horse-page.story-races .journal-tabs>button{font-size:14px;min-height:44px}
+.horse-page.story-races .race-notebook li>b{font-size:12px}
+.horse-page.story-races .deduction-grid span{font-size:12px}
+.horse-page.story-races .small-text{font-size:14px;color:#6c5c6a}
+.horse-page.story-races .final-podium>summary>span{font-size:12px;color:#81643d}
+.horse-page.story-races .podium-slots select{font-size:14px;min-height:44px}
+.horse-page.story-races .secondary{font-size:14px;min-height:44px}
+.horse-page.story-races .race-guide-card p,.welcome-guide p{font-size:14px;color:#6f596b}
+.horse-page.story-races .race-guide-card .step-label,.welcome-guide>.step-label{font-size:11px}
+.horse-page.story-races .race-guide-card .text-button,.welcome-guide .text-button{font-size:13px;min-height:44px}
+.horse-page.story-races .race-guide-card .secondary,.welcome-guide .secondary{font-size:13px;min-height:44px}
+@media(max-width:1000px) and (min-width:701px){
+ .horse-page.story-races .compact-race-board{grid-template-columns:1fr 1.1fr}
+ .horse-page.story-races .central-racecourse .empty-lane{font-size:11px;left:4px}
+ .horse-page.story-races .racecourse-heading{flex-wrap:wrap;gap:8px}
+ .horse-page.story-races .central-racecourse h2{font-size:23px}
+}
+@media(max-width:700px){
+ .horse-page.story-races .game-title h1{font-size:31px!important}
+ .horse-page.story-races .game-title .eyebrow{font-size:10px}
+ .horse-page.story-races .game-title p{font-size:14px}
+ .horse-page.story-races .race-progress>span{font-size:10px;max-width:45px}
+ .horse-page.story-races .race-progress{min-width:75px}
+ .horse-page.story-races .paddock-horse-number{font-size:13px}
+ .horse-page.story-races .paddock-horse-status{font-size:10px}
+ .horse-page.story-races .paddock-horse{min-height:67px}
+ .horse-page.story-races .all-horse-grid{gap:5px}
+ .horse-page.story-races .central-racecourse .empty-lane{font-size:11px;left:5px;max-width:180px;top:17px;line-height:1.5}
+ .horse-page.story-races .racecourse-heading{flex-wrap:wrap;gap:10px}
+ .horse-page.story-races .race-scene-header{align-items:flex-start}
+ .horse-page.story-races .race-stage-tools{gap:16px;flex-wrap:wrap}
+ .horse-page.story-races .journal-open-label{font-size:0}
+ .horse-page.story-races .deduction-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .horse-page.story-races .deduction-grid span{font-size:11px}
+ .horse-page.story-races .race-journal h2 small{font-size:11px}
+ .horse-page.story-races .journal-tabs>button{font-size:12px}
+ .horse-page.story-races .final-podium>summary{align-items:start}
+ .horse-page.story-races .final-podium>summary>span{font-size:11px}
+ .horse-page.story-races .race-guide-card{max-height:60dvh;overflow:auto}
+}

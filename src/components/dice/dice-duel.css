@@ -1,233 +1,287 @@
-/* All presentation is isolated from the map and Horse Racing. */
-.dice-duel{--dd-ink:#352440;--dd-muted:#66556e;max-width:1120px;margin:auto;color:var(--dd-ink);font-size:17px;line-height:1.6;padding-bottom:40px;isolation:isolate}
-.dice-duel *, .dice-duel *::before,.dice-duel *::after{box-sizing:border-box}
-.dice-duel button,.dice-duel select{font-size:16px;min-height:46px;touch-action:manipulation}
-.dice-duel button:focus-visible,.dice-duel summary:focus-visible,.dice-duel select:focus-visible{outline:3px solid #6846a4;outline-offset:4px}
-.dice-duel button:disabled{cursor:not-allowed}
-.dice-duel .game-breadcrumb{font-size:14px;flex-wrap:wrap;gap:12px}
-.dice-duel .game-title{display:flex;justify-content:space-between;align-items:center;margin:24px 0}
-.dice-duel .game-title h1{font-family:Georgia,serif;font-size:56px;line-height:1.1;margin:10px 0;letter-spacing:-2px}
-.dice-duel .game-title p{font-size:18px;color:var(--dd-muted)}
-.dice-duel .eyebrow,.dice-duel .step-label{font-size:14px;letter-spacing:.5px;text-transform:none;color:#705075}
-.dice-duel .dd-seal{font-size:90px;color:#a78050;text-shadow:0 0 28px #fff8c5}
-.dice-duel h2,.dice-duel .panel h3{font-family:Georgia,serif;font-size:30px;line-height:1.25;color:var(--dd-ink)}
+/* Dice Duel owns its presentation; game rules live in games/diceDuel. */
+.dice-duel{--dd-ink:#382b43;--dd-muted:#6e5f75;--dd-line:#cdbcaa;max-width:1040px;margin:auto;padding:12px 0 48px;color:var(--dd-ink);font-size:16px;line-height:1.6}
+.dice-duel *{box-sizing:border-box}
+.dice-duel button,.dice-duel select{font-size:15px;min-height:44px;touch-action:manipulation}
+.dice-duel button:focus-visible,.dice-duel select:focus-visible,.dice-duel summary:focus-visible{outline:3px solid #78519b;outline-offset:4px}
+.dice-duel h1:focus{outline:none}
+.dice-duel h1{scroll-margin-top:20px}
+.dice-duel h2,.dice-duel .panel h3{font:500 29px/1.25 Georgia,serif;color:var(--dd-ink)}
 .dice-duel p{line-height:1.65}
-.dice-duel .small-text,.dice-duel .mode-intro p,.dice-duel .math-explanation p,.dice-duel .law p{font-size:16px;color:var(--dd-muted);line-height:1.7}
-.dice-duel .primary{font-size:17px;padding:13px 25px;background:linear-gradient(#946dcc,#684399);border-color:#684399;min-height:50px}
-.dice-duel .secondary{padding:11px 18px;font-size:16px}
-.dice-duel .text-button{font-size:15px;color:#65467c;padding:8px 3px}
-.dice-duel .dd-progression{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:8px;border:1px solid #c7b28e;border-radius:20px;background:#fff7e5cf;box-shadow:0 8px 30px #51426810}
-.dice-duel .dd-progression button{display:flex;align-items:center;text-align:left;gap:12px;padding:13px;border-radius:14px;color:#584361;background:transparent;min-width:0}
-.dice-duel .dd-progression button[aria-current]{background:#e9dcf7;box-shadow:inset 0 0 0 1px #aa8ac6}
-.dice-duel .dd-progression button:disabled{opacity:.65}
-.dice-duel .dd-progression b{display:block;font-family:Georgia,serif;font-size:21px}
-.dice-duel .dd-progression small{display:block;font-size:13px}
-.dice-duel .dd-step{display:grid;place-items:center;width:35px;height:35px;flex-shrink:0;border:1px solid #b6a0c2;border-radius:50%;background:#fff8ea}
-.dice-duel .dd-stage-status{margin-left:auto;font-size:13px}
-.dice-duel .dd-progress-note{font-size:14px;color:var(--dd-muted);margin:12px 6px 28px}
-.dice-duel .keeper{margin:20px 0 32px;gap:22px}
-.dice-duel .keeper-speech{padding:22px 26px;background:#fff6e6e8;border-color:#c5ad8d;box-shadow:0 8px 25px #745c6a10}
-.dice-duel .keeper-speech p{font-size:19px;line-height:1.6;margin:8px 0 0}
-.dice-duel .keeper-avatar{flex-shrink:0}
-.dice-duel .adventure-prompt{text-align:center;font-size:32px;margin:22px 0 8px}
-.dice-duel .adventure-subtitle{text-align:center;font-size:17px;color:var(--dd-muted);margin-bottom:26px}
-.dice-duel .dice-grid{max-width:100%;gap:24px;margin:25px auto 35px}
-.dice-duel .die-card{border:1px solid transparent;border-radius:48% 48% 22px 22px;background:radial-gradient(ellipse at 50% 35%,color-mix(in srgb,var(--die) 16%,#fff9e9),#fff7e100 70%);padding:38px 18px 14px;overflow:visible;transition:border-color .2s,box-shadow .2s}
-.dice-duel .die-card:hover,.dice-duel .die-card.selected{border-color:color-mix(in srgb,var(--die) 55%,transparent);box-shadow:0 15px 40px color-mix(in srgb,var(--die) 17%,transparent)}
-.dice-duel .die-halo{width:230px;height:230px;max-width:100%;top:0;background:radial-gradient(circle,#fff9d9 0,color-mix(in srgb,var(--die) 16%,transparent) 40%,transparent 70%)}
-.dice-duel .die-visual{width:145px;height:150px;margin:25px auto 35px;filter:drop-shadow(0 18px 14px #51324c35)}
-.dice-duel .die-face,.dice-duel .die-side{width:126px;height:126px;border-radius:26px}
-.dice-duel .die-face{background:linear-gradient(135deg,color-mix(in srgb,var(--die) 40%,white),var(--die));border:2px solid #fff4dbb0;box-shadow:inset 3px 4px 7px #ffffff80,inset -5px -5px 14px #32234433}
-.dice-duel .die-side{left:17px;top:15px;background:color-mix(in srgb,var(--die) 80%,#2e2142)}
-.dice-duel .die-top{width:130px;height:115px;border-radius:24px;left:7px}
-.dice-duel .pips{grid-template-columns:repeat(3,16px);gap:11px}
-.dice-duel .pips i{width:16px;height:16px;background:#fff6e5;box-shadow:0 2px 2px #35244050}
-.dice-duel .rolled-number{font-size:76px;color:#fff8e9;text-shadow:0 3px 3px #37244360}
-.dice-duel .die-card h3{font-size:29px;font-weight:600;margin:15px 0 0;color:var(--die)}
-.dice-duel .die-card h3 span{display:none}
-.dice-duel .faces{display:flex;gap:5px;margin:16px 0;flex-wrap:wrap;justify-content:center}
-.dice-duel .faces span{width:30px;height:32px;font-size:16px;color:#4b354d;background:#fff6e5c9;border:1px solid #cdb797}
-.dice-duel .die-select{font-size:14px;letter-spacing:0;width:100%;padding:14px 4px;color:var(--die);background:none;border-top:1px solid #ad926944}
-.dice-duel .panel{background:linear-gradient(130deg,#fff9eae8,#f7e8d4e8);border:1px solid #cab494;border-radius:24px;padding:28px;box-shadow:0 12px 30px #7053660b;min-width:0}
-.dice-duel .battle{position:relative;min-height:390px;background:radial-gradient(ellipse at 50% 100%,#cbb7e35c,transparent 65%),linear-gradient(120deg,#fff8e8,#f4e5d4);grid-template-columns:1fr 1fr 1fr;gap:10px;border-radius:100px 100px 28px 28px}
-.dice-duel .battle-die{font-size:16px;color:var(--dd-muted)}
-.dice-duel .battle-die .eyebrow{font-size:15px;color:#503652}
-.dice-duel .battle-die .die-visual{margin:38px auto}
-.dice-duel .versus{display:block;font-size:48px;color:#9a784e;text-shadow:0 0 25px #fff4bb}
-.dice-duel .result{font-family:Georgia,serif;font-size:25px;line-height:1.25;min-height:90px;display:grid;place-items:center;color:#5d446d}
-.dice-duel .result.win{color:#23654b;animation:dd-result .5s ease-out}
-.dice-duel .result.loss{color:#9b3c51;animation:dd-result .5s ease-out}
-.dice-duel .battle-actions{justify-content:center;gap:28px;flex-wrap:wrap}
-.dice-duel .stats{grid-template-columns:repeat(4,minmax(0,1fr));background:#fff6e5;border-color:#cdbb9b}
-.dice-duel .stats strong{font-size:30px;color:#563c6a}
-.dice-duel .stats span{font-size:13px;letter-spacing:0;color:var(--dd-muted)}
-.dice-duel .quiet-details{border-color:#c5ad8d;margin:22px 0;font-size:16px}
-.dice-duel summary{font-size:16px;min-height:48px;padding:12px 0;cursor:pointer;color:#674970}
-.dice-duel .dd-workshop-steps{display:flex;justify-content:center;gap:28px;list-style:none;margin:30px 0;padding:0;flex-wrap:wrap}
-.dice-duel .dd-workshop-steps li{font-size:14px;color:#6d5875;display:flex;gap:8px;align-items:center}
-.dice-duel .dd-workshop-steps li[aria-current]{color:#55337a;font-weight:700}
-.dice-duel .dd-workshop-steps li span{display:grid;place-items:center;border:1px solid #bfa2cc;border-radius:50%;width:28px;height:28px;background:#faf0ff}
-.dice-duel .hunch-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:800px;margin:25px auto 45px}
-.dice-duel .hunch-choices button{padding:22px;font-size:18px;text-align:left}
-.dice-duel .hunch-note{font-size:17px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
-.dice-duel .watch-heading{text-align:center}
-.dice-duel .dd-experiment-dice{display:flex;justify-content:center;align-items:center;gap:45px;margin:10px 0 22px;font-family:Georgia,serif;font-size:24px}
-.dice-duel .dd-experiment-dice>div{display:flex;flex-direction:column;align-items:center}
-.dice-duel .die-visual.small{scale:.72;width:105px;height:110px;margin:8px 0;transform:none!important;transform-origin:center}
-.dice-duel .dd-chart-key{display:flex;justify-content:center;gap:24px;font-size:14px;flex-wrap:wrap}
-.dice-duel .dd-chart-key span:first-child{color:#76499c}.dice-duel .dd-chart-key span:last-child{color:#866023}
-.dice-duel .chart{height:310px;margin:12px 0;min-width:0}
-.dice-duel .recharts-cartesian-axis-tick-value,.dice-duel .recharts-label{font-size:14px;fill:#68526e}
-.dice-duel .watch-readout{font-size:18px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:16px 0;color:#59415f}
-.dice-duel .watch-readout b{font-size:26px;color:#684196}
-.dice-duel .watch-action{text-align:center;margin:20px 0}
-.dice-duel .repeat-experiment{margin:auto}
-.dice-duel .control-label,.dice-duel .pair-controls label{font-size:16px;color:#624e69}
-.dice-duel select{background:#fff9ed;color:#493251;border:1px solid #b9a285;border-radius:9px;width:100%;padding:10px;max-width:100%}
-.dice-duel fieldset{min-width:0;border:0;padding:0}
-.dice-duel .evidence-trail{margin:32px 0}
-.dice-duel .evidence-trail>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:12px}
-.dice-duel .evidence-trail>div>div{padding:20px;border:1px dashed #ac99b7;border-radius:18px;background:#fff4e280;display:flex;flex-direction:column;gap:8px}
-.dice-duel .evidence-trail .found{border:1px solid #b6a078;background:linear-gradient(120deg,#fff9de,#eadff1);box-shadow:0 5px 15px #71557412}
-.dice-duel .evidence-trail b{font-size:17px}.dice-duel .evidence-trail span{font-size:14px;color:#64516b}
-.dice-duel .story-reveal{position:relative;text-align:center;padding:40px 28px;background:radial-gradient(ellipse at top,#fff9c8,#f4e9fa 65%,#f7ebd7);animation:dd-reveal .8s ease-out}
-.dice-duel .story-reveal h2{font-size:clamp(32px,4vw,48px);margin:12px 0 30px}
-.dice-duel .dd-reveal-star{display:block;font-size:45px;color:#b58b3e;text-shadow:0 0 25px #f3ce60;animation:dd-glow 3s ease-in-out infinite}
-.dice-duel .revealed-cycle{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:25px 0 32px}
-.dice-duel .revealed-cycle>div{display:grid;grid-template-columns:auto auto auto;align-items:center;gap:12px;font-family:Georgia,serif;font-size:22px}
-.dice-duel .revealed-cycle small{grid-column:1/-1;font-family:system-ui,sans-serif;font-size:14px;color:#67516c}
-.dice-duel .revealed-cycle span{display:inline-block;font-size:32px;color:#9d7745;animation:dd-arrow 1.8s ease-in-out infinite}
-.dice-duel .dd-research-nav{display:flex;gap:10px;margin:26px 0;padding:6px;background:#fff4e5;border:1px solid #cbb594;border-radius:16px}
-.dice-duel .dd-research-nav button{flex:1;border-radius:11px;padding:15px;font-size:18px;color:#62466b}
-.dice-duel .dd-research-nav button[aria-pressed=true]{background:#e6d6f3;box-shadow:inset 0 0 0 1px #b59ac9;color:#4f2d73}
-.dice-duel .strategy-heading{gap:20px;flex-wrap:wrap}
-.dice-duel .segmented{background:#f0e5ef;border:1px solid #cbb6ca;flex-wrap:wrap}
-.dice-duel .segmented button{font-size:15px;color:#634e70;padding:12px}
-.dice-duel .segmented button.active{background:#dcccdf;color:#442851}
-.dice-duel .strategy-commit,.dice-duel .strategy-result p{font-size:18px;color:#584160}
-.dice-duel .strategy-choices{gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
-.dice-duel .strategy-choices button{padding:18px 10px;background:#fff7e7;border:1px solid #cab494;border-radius:18px;min-width:0}
-.dice-duel .strategy-choices button.chosen{background:#eee1f6;outline:2px solid #9d75bb}
-.dice-duel .strategy-choices b{font-size:20px}.dice-duel .strategy-choices span,.dice-duel .strategy-result small{font-size:14px;color:#66516d}
-.dice-duel .strategy-comparison>div{background:#fff8e9;border-color:#cbb795;padding:18px}
-.dice-duel .strategy-comparison b{font-size:17px}.dice-duel .strategy-comparison strong{font-size:32px;color:#65437f}.dice-duel .strategy-comparison small{font-size:14px;color:#624d6b}
-.dice-duel .experiment-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.dice-duel .outcome-grid{grid-template-columns:22px repeat(6,minmax(0,1fr));gap:4px}
-.dice-duel .outcome-grid button{min-height:44px;height:44px;font-size:15px}
-.dice-duel .outcome-grid b{font-size:14px;color:#57405d}
-.dice-duel .outcome-win{background:#d4eadd;color:#205b43}.dice-duel .outcome-loss{background:#f5dbe0;color:#8c3349}.dice-duel .outcome-tie{background:#e7dfed;color:#5c4c69}
-.dice-duel .grid-legend{font-size:14px;gap:12px;flex-wrap:wrap}.dice-duel .grid-legend span{color:#62486a}
-.dice-duel .formula{font-size:22px;color:#593c70;overflow-wrap:anywhere;background:#ede0f1;border-color:#c9b1d0}
-.dice-duel .note-box{font-size:16px;color:#785729;background:#f5e8cb;line-height:1.7}
-.dice-duel .expected-values{gap:12px;flex-wrap:wrap}.dice-duel .expected-values span{font-size:16px}.dice-duel .expected-values small{font-size:14px;color:#65516e}
-.dice-duel .exact-result>span,.dice-duel .best-response b{font-size:16px;color:#62466c}.dice-duel .exact-result strong{color:#55386c}.dice-duel .exact-result strong span{color:#745389}
-.dice-duel .probability-table{font-size:16px;table-layout:fixed}.dice-duel .probability-table th{font-size:14px;overflow-wrap:anywhere}.dice-duel .probability-table td{color:#60476a;background:#f1e4ed}.dice-duel .probability-table td.advantage{color:#265d46;background:#dcebdd}
-.dice-duel .discovery-journal h2{font-size:28px}.dice-duel .discovery-journal p{font-size:17px}.dice-duel .discovery-journal small{font-size:14px;color:#66516d}
-.dice-duel .dd-save-tools{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;font-size:14px;color:#67516d;border-top:1px solid #b59b7d66;padding-top:16px}
-.dice-duel .dd-reset-confirm{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.dice-duel .dd-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-@keyframes dd-reveal{from{opacity:0;translate:0 16px}to{opacity:1;translate:0 0}}
-@keyframes dd-arrow{50%{translate:5px 0;opacity:.6}}
-@keyframes dd-glow{50%{filter:drop-shadow(0 0 12px #dfac40)}}
-@keyframes dd-result{from{scale:.9;opacity:.4}to{scale:1;opacity:1}}
-@media(max-width:760px){.dice-duel .dd-stage-status{display:none}.dice-duel .dd-progression button{gap:7px;padding:10px 6px}.dice-duel .dd-progression small{font-size:13px}.dice-duel .dd-progression b{font-size:18px}.dice-duel .dd-step{width:28px;height:28px}.dice-duel .experiment-grid{grid-template-columns:1fr}.dice-duel .battle{border-radius:35px;grid-template-columns:1fr 1fr;padding:24px 15px}.dice-duel .battle-center{grid-column:1/-1;grid-row:2;display:flex;flex-direction:column;gap:10px}.dice-duel .battle-center .versus{display:block;font-size:32px}.dice-duel .result{min-height:50px;font-size:26px;padding:8px}.dice-duel .battle-center .primary{font-size:17px;min-height:50px}.dice-duel .battle-die .die-visual{margin:28px auto}.dice-duel .dice-grid{gap:6px}.dice-duel .die-card{padding:20px 6px 12px}.dice-duel .die-card .die-visual{scale:.68;width:100px;height:125px;margin:0 auto;transform:none!important;transform-origin:top center}.dice-duel .die-card h3{font-size:22px}.dice-duel .die-select{font-size:13px;justify-content:center;gap:5px}.dice-duel .faces{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.dice-duel .faces span{width:26px;height:28px;font-size:15px}.dice-duel .game-title h1{font-size:48px}.dice-duel .dd-seal{font-size:64px}.dice-duel .keeper{gap:10px}.dice-duel .keeper-speech{padding:18px}.dice-duel .keeper-speech p{font-size:18px}.dice-duel .keeper-avatar{width:86px}.dice-duel .dd-workshop-steps{gap:10px}.dice-duel .dd-workshop-steps li{font-size:13px;gap:4px}.dice-duel .dd-workshop-steps li span{width:24px;height:24px}.dice-duel .evidence-trail>div{grid-template-columns:1fr}.dice-duel .panel{padding:20px}.dice-duel .strategy-battle{grid-template-columns:1fr 1fr}.dice-duel .strategy-result{grid-column:1/-1;grid-row:2}.dice-duel .strategy-choices{gap:6px}.dice-duel .strategy-choices button{padding:10px 4px}.dice-duel .strategy-choices .die-visual.small{scale:.55;width:80px;height:90px}.dice-duel .strategy-choices b{font-size:18px}.dice-duel .strategy-choices span{font-size:13px;overflow-wrap:anywhere}.dice-duel .law{grid-template-columns:1fr}.dice-duel .dd-research-nav button{font-size:16px;padding:12px 7px}.dice-duel .stats{padding:15px 5px}.dice-duel .stats span{font-size:13px}.dice-duel .chart{height:270px}.dice-duel .hunch-choices button{padding:16px;font-size:17px}}
-@media(max-width:420px){.dice-duel .dd-progression{gap:2px;padding:4px}.dice-duel .dd-progression button{flex-direction:column;align-items:center;text-align:center}.dice-duel .dd-progression small{font-size:13px}.dice-duel .dd-progression b{font-size:18px}.dice-duel .keeper{align-items:flex-start}.dice-duel .keeper-avatar{width:65px}.dice-duel .keeper-speech{padding:15px}.dice-duel .hunch-choices{grid-template-columns:1fr}.dice-duel .die-card .die-visual{scale:.58;width:85px;height:110px}.dice-duel .die-card h3{font-size:19px}.dice-duel .die-select>span{display:none}.dice-duel .stats{grid-template-columns:repeat(2,1fr);gap:16px}.dice-duel .dd-experiment-dice{gap:22px}.dice-duel .pair-controls{gap:8px}.dice-duel .game-title h1{font-size:48px}.dice-duel .dd-seal{display:none}}
-@media(prefers-reduced-motion:reduce){.dice-duel *,.dice-duel *::before,.dice-duel *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-/* Override older, more specific storybook microtype within this page only. */
-.dice-duel .game-title .eyebrow,.dice-duel .keeper-speech .step-label{font-size:14px;letter-spacing:.5px;text-transform:none;color:#705075}
-.dice-duel .game-title{padding:10px 0;margin:18px 0 24px}
-.dice-duel .die-card{box-shadow:none;border-color:transparent;border-radius:28px;background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--die) 14%,#fff7e5) 0,transparent 72%)}
-.dice-duel .die-card:hover,.dice-duel .die-card.selected{box-shadow:0 12px 35px color-mix(in srgb,var(--die) 15%,transparent)}
-.dice-duel .dice-grid::before{opacity:.4;height:80px;inset:auto 0 0}
-.dice-duel .die-select{text-transform:none;font-weight:600}
-@media(max-width:760px){.dice-duel .game-title .eyebrow,.dice-duel .keeper-speech .step-label{font-size:13px}.dice-duel .dice-grid{padding:0 0 15px}.dice-duel .die-card{border-radius:20px}.dice-duel .keeper-speech .step-label{display:block;line-height:1.5}}
-/* Guided, compact scenes. */
-.dice-duel .game-title{margin:8px 0 16px;padding:0}
-.dice-duel .game-title h1{font-size:48px;margin:4px 0}
-.dice-duel .dd-seal{font-size:64px}
-.dice-duel .dd-progress-note{margin:8px 4px;font-size:14px}
-.dice-duel .dd-top-tools{display:flex;align-items:flex-start;gap:20px;justify-content:space-between;margin-bottom:14px}
-.dice-duel .dd-top-tools .journey-tools{flex:1;margin:0;border-bottom:1px solid #b99e7a50}
-.dice-duel .dd-top-tools summary{padding:7px 0;min-height:42px}
-.dice-duel .dd-stage{scroll-margin-top:16px}
-.dice-duel .keeper{margin:10px 0 16px}
-.dice-duel .keeper-avatar{width:94px}
-.dice-duel .keeper-speech{padding:14px 22px}
-.dice-duel .adventure-prompt{margin:12px 0 4px}
-.dice-duel .adventure-subtitle{margin:4px 0 12px}
-.dice-duel .dice-grid{margin:12px auto 18px;padding-bottom:12px}
-.dice-duel .dice-grid::before{display:none}
-.dice-duel .dd-die-pick{min-width:0;text-align:center}
-.dice-duel .dd-inspect{min-height:295px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:26px;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--die) 14%,#fff6e8),transparent 72%)}
-.dice-duel .dd-inspect h3{font:600 26px Georgia,serif;margin:5px 0}
-.dice-duel .dd-inspect small{font-size:13px;color:#64516b}
-.dice-duel .dd-mystery{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:170px;height:220px;border:1px solid #b7a2ca;border-radius:34px;background:radial-gradient(ellipse at top,#f8ecff,#d2bddf);box-shadow:inset 0 0 0 5px #fff5e680,0 12px 24px #65507920;color:#684b7a;transition:transform .3s,box-shadow .3s}
-.dice-duel .dd-mystery:hover{transform:translateY(-8px) rotate(-3deg);box-shadow:0 0 35px #fff2bb}
-.dice-duel .dd-mystery>span{font-size:68px;line-height:1.2;color:#fff8dc;text-shadow:0 0 20px #fff6d0}
-.dice-duel .dd-mystery b{font:24px Georgia,serif}
+.dice-duel .eyebrow,.dice-duel .step-label{font-size:12px;letter-spacing:1px;color:#765d80}
+.dice-duel .small-text,.dice-duel .mode-intro p,.dice-duel .math-explanation p,.dice-duel .law p{font-size:15px;color:var(--dd-muted);line-height:1.75}
+.dice-duel .primary{background:linear-gradient(#916bb5,#69468d);border-color:#69468d;font-size:15px;min-height:46px;padding:12px 24px;gap:12px}
+.dice-duel .primary:hover{background:linear-gradient(#a17cc5,#76509c)}
+.dice-duel .secondary{font-size:15px;padding:11px 18px;color:#624477;border-color:#c2a88a}
+.dice-duel .text-button{font-size:14px;color:#644779;padding:8px 4px;text-underline-offset:4px}
+.dice-duel .text-button:hover{text-decoration:underline}
+.dice-duel button:disabled{cursor:default}
+.dice-duel .dd-focus-header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:12px 0}
+.dice-duel .dd-focus-header h1{font:500 clamp(32px,4vw,44px)/1.15 Georgia,serif;letter-spacing:-1px;margin:7px 0;color:var(--dd-ink)}
+.dice-duel .dd-chapter-trail{display:flex;gap:24px;list-style:none;padding:0;margin:16px 0 20px;font-size:13px;color:#75697f}
+.dice-duel .dd-chapter-trail li{padding-bottom:7px;border-bottom:2px solid transparent}
+.dice-duel .dd-chapter-trail [aria-current]{color:#5c3976;border-color:#916bb5;font-weight:650}
+.dice-duel .dd-stage{position:relative;padding:24px 34px;min-height:580px;border:1px solid #c9b394;border-radius:26px;background:radial-gradient(ellipse at 50% 75%,#efdfce70,transparent 65%),linear-gradient(135deg,#fff9edfa,#f7eddff5);box-shadow:inset 0 0 0 5px #fff7e880,0 20px 50px #654b7420;isolation:isolate}
+.dice-duel .keeper{max-width:none;align-items:center;gap:16px;margin:0 0 20px;min-height:98px}
+.dice-duel .keeper-avatar{width:86px}
+.dice-duel .keeper-speech{padding:13px 20px;background:#f3e8f066;border:1px solid #cdbbd2;border-radius:5px 18px 18px 18px;box-shadow:none}
+.dice-duel .keeper-speech .step-label{font-size:11px;letter-spacing:.6px;color:#775782}
+.dice-duel .keeper-speech p{font:18px/1.55 Georgia,serif;color:#57425f;margin:5px 0 0}
+.dice-duel .character-caption{font-size:9px;letter-spacing:.3px;color:#74617e}
+.dice-duel .dd-scene-heading{text-align:center;margin:4px 0 10px}
+.dice-duel .dd-scene-heading h2{font-size:29px;margin:0 0 7px}
+.dice-duel .dd-scene-heading p{font-size:14px;color:var(--dd-muted)}
+.dice-duel .dd-selection{position:relative}
+.dice-duel .dd-die-browser{display:flex;align-items:center;justify-content:center;gap:26px;max-width:570px;margin:0 auto}
+.dice-duel .dd-browser-center{flex:1;min-width:0;max-width:330px}
+.dice-duel .dd-browse-arrow{width:46px;height:46px;flex-shrink:0;border:1px solid #cbb7ca;border-radius:50%;background:#fffaf1;color:#70507e;font:28px Georgia,serif;box-shadow:0 3px 8px #7555750c}
+.dice-duel .dd-inspect{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:320px;text-align:center}
+.dice-duel .dd-inspect::before{content:'';position:absolute;z-index:-1;width:240px;height:72px;top:108px;border:1px solid #c9ac7e55;border-radius:50%;background:radial-gradient(ellipse,#e8cfa46b,#decbe033 60%,transparent 72%);box-shadow:0 0 0 12px #c9ac7e0a}
+.dice-duel .dd-inspect h3{font:600 26px Georgia,serif;margin:0}
+.dice-duel .dd-inspect small{font-size:12px;color:var(--dd-muted)}
+.dice-duel .dd-mystery{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;width:190px;height:220px;border:1px solid #aa8bbc;border-radius:28px;background:radial-gradient(ellipse at 50% 10%,#f8ebff,#ddc7e9);box-shadow:inset 0 0 0 5px #fff7e466,0 12px 24px #74567520;color:#684b7a}
+.dice-duel .dd-mystery>span{font-size:72px;line-height:1.1;color:#fff8df;text-shadow:0 0 16px #fff4c4}
+.dice-duel .dd-mystery b{font:23px Georgia,serif}
 .dice-duel .dd-cube-controls{touch-action:pan-y}
-.dice-duel .dd-cube-view{display:grid;place-items:center;width:160px;height:155px;perspective:650px;cursor:grab;background:none;border:0;user-select:none;touch-action:pan-y}
+.dice-duel .dd-cube-view{display:grid;place-items:center;width:180px;height:154px;perspective:650px;background:none;border:0;user-select:none;touch-action:pan-y;cursor:grab}
 .dice-duel .dd-cube-view:active{cursor:grabbing}
-.dice-duel .dd-cube{width:94px;height:94px;position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.2,1);display:block}
-.dice-duel .dd-cube-face{position:absolute;inset:0;display:grid;place-items:center;border:2px solid #fff2d2;border-radius:15px;background:linear-gradient(135deg,color-mix(in srgb,var(--die) 55%,white),var(--die));color:#fff9ed;font:64px Georgia,serif;backface-visibility:hidden;box-shadow:inset 3px 3px 10px #ffffff60,inset -4px -4px 12px #42263730;text-shadow:0 2px 3px #3a214e55}
-.dice-duel .face-0{transform:translateZ(47px)}.dice-duel .face-1{transform:rotateY(90deg) translateZ(47px)}.dice-duel .face-2{transform:rotateY(180deg) translateZ(47px)}.dice-duel .face-3{transform:rotateY(270deg) translateZ(47px)}.dice-duel .face-4{transform:rotateX(90deg) translateZ(47px)}.dice-duel .face-5{transform:rotateX(-90deg) translateZ(47px)}
-.dice-duel .dd-face-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
-.dice-duel .dd-face-dots button{min-height:38px;min-width:30px;padding:3px;border:1px solid #bca987;border-radius:8px;background:#fff6e5;color:#61476c;font-size:16px}
-.dice-duel .dd-face-dots button[aria-pressed=true]{background:#e4d3ed;outline:2px solid #9575ad}
-.dice-duel .dd-choose{margin-top:5px;min-height:44px}
-.dice-duel .dd-curiosity{text-align:center;border:1px solid #c4a7cc;border-radius:28px;padding:30px;background:radial-gradient(ellipse at top,#fff2c9,#efe0f5);animation:dd-reveal .5s ease-out}
-.dice-duel .dd-curiosity>span{display:block;font-size:48px;color:#a48242}
-.dice-duel .dd-curiosity h2{margin:8px 0;font-size:32px}
-.dice-duel .dd-curiosity .text-button{margin:8px auto}
-.dice-duel .strategy-battle{margin-top:16px}
-.dice-duel .strategy-heading h3{margin:5px 0 8px}
-.dice-duel .strategy-heading .small-text{margin:0}
-.dice-duel .strategy-commit{padding:12px 18px;margin:14px 0}
-.dice-duel .battle{min-height:290px}
-.dice-duel .battle-die .die-visual{margin:20px auto}
-.dice-duel .strategy-comparison{margin-top:12px}
-.dice-duel .strategy-comparison>div{padding:12px}
-.dice-duel .dd-save-tools{margin-top:22px}
-.dice-duel .dd-intro{width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:30px;border:1px solid #bba181;border-radius:30px;background:radial-gradient(ellipse at top,#fff3ce,#f8edf8 65%,#f5e9d4);color:#493150;box-shadow:0 28px 100px #25163b66}
-.dice-duel .dd-intro::backdrop{background:#30223d80;backdrop-filter:blur(7px)}
-.dice-duel .dd-intro-content{text-align:center;animation:dd-reveal .4s ease-out}
-.dice-duel .dd-intro-symbol{display:block;font-size:72px;color:#a5814c;line-height:1.2;margin:10px}
-.dice-duel .dd-intro-place{font-size:14px;color:#7b5b82}
-.dice-duel .dd-intro h2{font-size:34px;margin:16px 0}
-.dice-duel .dd-intro p{font-size:18px;line-height:1.7}
-.dice-duel .dd-intro-hint{font-size:16px;padding:12px;background:#fff6df;border-radius:12px;margin:18px 0}
-.dice-duel .dd-intro-dots{display:flex;gap:8px;justify-content:center;margin:22px 0}
-.dice-duel .dd-intro-dots span{width:8px;height:8px;background:#d1bedb;border-radius:50%}.dice-duel .dd-intro-dots .active{width:25px;border-radius:8px;background:#8e65ac}
-.dice-duel .dd-intro-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}
-@media(max-width:600px){.dice-duel .game-title h1{font-size:42px}.dice-duel .game-title p{font-size:16px}.dice-duel .dd-inspect{min-height:260px}.dice-duel .dd-mystery{width:100%;max-width:135px;height:185px}.dice-duel .dd-mystery b{font-size:19px}.dice-duel .dd-cube-view{width:100px;height:125px;scale:.8}.dice-duel .dd-face-dots{max-width:100px;gap:4px}.dice-duel .dd-face-dots button{min-height:36px;min-width:28px}.dice-duel .dd-inspect h3{font-size:20px}.dice-duel .dd-inspect small{font-size:13px;text-align:center}.dice-duel .dd-choose{font-size:14px;padding:8px}.dice-duel .dd-top-tools{gap:10px}.dice-duel .dd-top-tools .text-button{font-size:14px;white-space:nowrap}.dice-duel .keeper-avatar{width:65px}.dice-duel .keeper-speech p{font-size:17px}.dice-duel .dd-curiosity{padding:22px 15px}.dice-duel .dd-curiosity h2{font-size:29px}.dice-duel .dd-intro{padding:24px}.dice-duel .dd-intro h2{font-size:30px}}
-.dice-duel .dd-top-tools .journey-tools>summary{font-size:15px;letter-spacing:0}
-/* A focused scene: one task, with optional tools behind explicit menus. */
-.dice-duel .dd-focus-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:18px 0 8px}
-.dice-duel .dd-focus-header h1{font:500 clamp(32px,4vw,48px)/1.15 Georgia,serif;margin:8px 0;color:#382440;letter-spacing:-1px}
-.dice-duel .dd-scene-position{font-size:14px;color:#735a79;margin:8px 0 20px}
-.dice-duel .dd-adventure-menu{position:relative;flex-shrink:0}
-.dice-duel .dd-adventure-menu>summary{font-size:15px;padding:10px 16px;border:1px solid #bca2c7;border-radius:14px;background:#fff6e8;list-style:none}
-.dice-duel .dd-menu-content{position:absolute;right:0;top:60px;width:min(600px,calc(100vw - 40px));max-height:75dvh;overflow:auto;z-index:30;background:#fff4e3;border:1px solid #bea484;border-radius:20px;padding:22px;box-shadow:0 20px 60px #44304c40}
-.dice-duel .dd-menu-content .dd-progression{margin:14px 0;grid-template-columns:1fr;padding:4px}
-.dice-duel .dd-menu-content .dd-progression button{flex-direction:row;text-align:left;justify-content:flex-start}
-.dice-duel .dd-menu-content .dd-stage-status{display:block}
-.dice-duel .dd-menu-content .dd-progression small{display:none}
-.dice-duel .dd-menu-content .journey-tools{margin:8px 0}
-.dice-duel .dd-die-browser{display:flex;align-items:center;justify-content:center;gap:30px;max-width:600px;margin:0 auto}
-.dice-duel .dd-browser-center{flex:1;min-width:0;max-width:340px}
-.dice-duel .dd-browse-arrow{width:48px;height:48px;flex-shrink:0;border-radius:50%;background:#fff6e7;border:1px solid #bea4b8;color:#755385;font:32px Georgia,serif}
-.dice-duel .dd-die-count{text-align:center;font-size:14px;color:#725d79;margin:4px 0}
-.dice-duel .dd-face-readout{font-size:15px;color:#68506f;margin:4px 0}
-.dice-duel .dd-inspect{min-height:300px}
-.dice-duel .dd-mystery{width:180px}
-.dice-duel .dd-inspect .dd-choose{margin-top:14px;min-width:180px}
-.dice-duel .dd-duel-options{max-width:750px;margin:18px auto}
-.dice-duel .dd-duel-options>summary{text-align:center;font-size:15px;color:#785b80}
-.dice-duel .dd-section-switch{margin:12px 0}
-.dice-duel .dd-section-switch>summary{font-size:15px;padding:6px}
-.dice-duel .dd-hunch-details>summary{font-size:14px;padding:4px 0}
-.dice-duel .evidence-trail{margin:12px 0}
+.dice-duel .dd-cube{display:block;width:92px;height:92px;position:relative;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.75,.2,1);pointer-events:none}
+.dice-duel .dd-cube-face{position:absolute;inset:0;display:grid;place-items:center;border:2px solid #fff2d8;border-radius:9px;background:linear-gradient(135deg,color-mix(in srgb,var(--die) 70%,white),var(--die));color:#fff9ed;font:58px Georgia,serif;backface-visibility:hidden;box-shadow:inset 2px 2px 8px #ffffff40,inset -4px -4px 10px #42263730;text-shadow:0 2px 3px #3a214e55;pointer-events:none}
+.dice-duel .face-0{transform:translateZ(46px)}
+.dice-duel .face-1{transform:rotateY(90deg) translateZ(46px)}
+.dice-duel .face-2{transform:rotateY(180deg) translateZ(46px)}
+.dice-duel .face-3{transform:rotateY(270deg) translateZ(46px)}
+.dice-duel .face-4{transform:rotateX(90deg) translateZ(46px)}
+.dice-duel .face-5{transform:rotateX(-90deg) translateZ(46px)}
+.dice-duel .dd-face-values{display:flex;gap:6px;justify-content:center}
+.dice-duel .dd-face-values span{display:grid;place-items:center;width:30px;height:32px;border:1px solid #c9b69b;border-radius:7px;background:#fffaf0;font-size:15px;color:#5c4864}
+.dice-duel .dd-face-values .current{border-color:var(--die);background:color-mix(in srgb,var(--die) 10%,#fffaf0)}
+.dice-duel .dd-choose{margin-top:4px}
+.dice-duel .dd-browse-position{display:flex;justify-content:center;align-items:center;gap:7px;margin-top:12px}
+.dice-duel .dd-browse-position>span{width:6px;height:6px;background:#cdbcd6;border-radius:50%}
+.dice-duel .dd-browse-position>.current{background:#76508c;width:18px;border-radius:5px}
+.dice-duel .dd-browse-position small{font-size:12px;color:var(--dd-muted);margin-left:7px}
+.dice-duel .panel{min-width:0;padding:22px;border:1px solid #d0bfa5;border-radius:16px;background:#fffaf177;box-shadow:none}
+.dice-duel .battle.panel{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:16px;min-height:270px;padding:24px 15px;background:radial-gradient(ellipse at 50% 100%,#d9c6e33b,transparent 68%);border:0;border-bottom:1px solid var(--dd-line);outline:0;border-radius:0;box-shadow:none;overflow:visible}
+.dice-duel .battle::before{display:none}
+.dice-duel .battle-center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.dice-duel .battle-die{text-align:center;font-size:14px;color:var(--dd-muted)}
+.dice-duel .battle-die .eyebrow{display:block;font-size:12px;color:#55435f;text-align:center}
+.dice-duel .die-visual{width:120px;height:125px;margin:25px auto;filter:drop-shadow(0 12px 10px #77577730)}
+.dice-duel .die-face,.dice-duel .die-side{width:104px;height:104px;border-radius:20px}
+.dice-duel .die-face{background:linear-gradient(135deg,color-mix(in srgb,var(--die) 60%,white),var(--die));border:2px solid #fff4dbb0;box-shadow:inset 3px 3px 7px #ffffff70,inset -4px -4px 12px #32234433}
+.dice-duel .die-side{left:12px;top:12px;background:color-mix(in srgb,var(--die) 80%,#2e2142)}
+.dice-duel .die-top{width:104px;height:95px;left:5px;border-radius:20px}
+.dice-duel .pips{grid-template-columns:repeat(3,12px);gap:9px}
+.dice-duel .pips i{width:12px;height:12px;background:#fff6e5;box-shadow:0 1px 2px #35244050}
+.dice-duel .rolled-number{font-size:62px;color:#fff8e9;text-shadow:0 2px 3px #37244360}
+.dice-duel .versus{display:block;font:italic 34px Georgia,serif;color:#a08670}
+.dice-duel .result{font:25px/1.3 Georgia,serif;min-height:70px;display:grid;place-items:center;color:#5d446d;padding:12px 0}
+.dice-duel .result.win{color:#24674b}
+.dice-duel .result.loss{color:#9b3c51}
+.dice-duel .dd-next-step{text-align:center;padding:20px 10px 6px}
+.dice-duel .dd-next-step>p{font-size:15px;color:var(--dd-muted);margin-bottom:12px}
+.dice-duel .dd-actions{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:14px}
+.dice-duel details>summary{cursor:pointer;font-size:14px;min-height:44px;padding:11px 0;color:#70557c}
+.dice-duel details[open]>summary{margin-bottom:10px}
+.dice-duel .quiet-details,.dice-duel .dd-duel-options{border-top:1px solid #c5ad8d66;margin:20px 0 0;padding-top:5px}
+.dice-duel .dd-duel-options{max-width:800px;margin:20px auto 0}
+.dice-duel .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-color:var(--dd-line);background:#fff8e9;padding:16px;margin:15px 0}
+.dice-duel .stats strong{font:26px Georgia,serif;color:#67477c}
+.dice-duel .stats span{font-size:12px;letter-spacing:0;color:var(--dd-muted);text-transform:none}
+.dice-duel .hunch-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:660px;margin:28px auto 40px}
+.dice-duel .hunch-choices button{justify-content:flex-start;gap:12px;font:18px Georgia,serif;padding:20px;min-height:65px}
+.dice-duel .dd-workshop-status{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 10px;color:var(--dd-muted);font-size:13px}
+.dice-duel .dd-hunch-details{position:relative}
+.dice-duel .hunch-note{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:14px;padding:10px 0}
+.dice-duel .watch-scene.panel{max-width:none;padding:10px 0 0;border:0;background:transparent}
+.dice-duel .dd-experiment-dice{display:flex;justify-content:center;align-items:center;gap:44px;margin:0 0 10px;font:20px Georgia,serif}
+.dice-duel .dd-experiment-dice>div{display:flex;flex-direction:column;align-items:center}
+.dice-duel .die-visual.small{transform:none!important;width:88px;height:90px;margin:10px 0}
+.dice-duel .die-visual.small .die-face,.dice-duel .die-visual.small .die-side{width:76px;height:76px;border-radius:15px}
+.dice-duel .die-visual.small .die-top{width:76px;height:68px;border-radius:15px}
+.dice-duel .die-visual.small .pips{grid-template-columns:repeat(3,9px);gap:6px}
+.dice-duel .die-visual.small .pips i{width:9px;height:9px}
+.dice-duel .watch-heading{text-align:center}
+.dice-duel .chart{height:230px;margin:12px 0}
+.dice-duel .recharts-cartesian-axis-tick-value,.dice-duel .recharts-label{font-size:12px;fill:#68526e}
+.dice-duel .dd-chart-key{display:flex;justify-content:center;gap:22px;font-size:12px;flex-wrap:wrap;color:#765781}
+.dice-duel .dd-chart-key span:last-child{color:#876228}
+.dice-duel .watch-readout{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;font-size:14px;min-height:38px;color:#62516b;margin:8px 0}
+.dice-duel .watch-readout b{font-size:22px;color:#684196;margin-left:5px}
+.dice-duel .evidence-empty{height:210px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#8e719a}
+.dice-duel .evidence-empty span{font-size:38px}
+.dice-duel .evidence-empty p{font:19px Georgia,serif}
+.dice-duel .control-label,.dice-duel .pair-controls label{font-size:14px;color:#624e69}
+.dice-duel select{font-size:15px;padding:10px;background:#fffaf0;color:#493251;border-color:#b9a285;max-width:100%}
+.dice-duel fieldset{min-width:0;border:0;padding:0}
+.dice-duel .experiment-settings fieldset{max-width:560px;margin:auto}
+.dice-duel .experiment-settings .secondary{margin-top:14px}
+.dice-duel .experiment-settings .small-text{margin-top:12px}
+.dice-duel .evidence-trail{margin:12px 0 0}
 .dice-duel .evidence-trail section>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.dice-duel .evidence-trail section>div>div{padding:14px;border-radius:12px;display:flex;flex-direction:column;border:1px solid #b9a0bf}
-@media(max-width:600px){.dice-duel .dd-focus-header{align-items:flex-start}.dice-duel .dd-focus-header h1{font-size:32px}.dice-duel .dd-adventure-menu>summary{font-size:14px;padding:8px 10px}.dice-duel .dd-die-browser{gap:10px}.dice-duel .dd-browse-arrow{width:44px;height:44px}.dice-duel .dd-inspect .dd-cube-view{width:150px;height:155px;scale:1}.dice-duel .dd-inspect{min-height:300px}.dice-duel .dd-menu-content{position:fixed;top:120px;left:20px;right:20px;width:auto}.dice-duel .evidence-trail section>div{grid-template-columns:1fr}}
-.dice-duel .dd-cube,.dice-duel .dd-cube-face{pointer-events:none}
+.dice-duel .evidence-trail section>div>div{border:1px solid var(--dd-line);border-radius:10px;padding:14px;background:#fff8e9}
+.dice-duel .evidence-trail b{display:block;font:17px Georgia,serif}
+.dice-duel .evidence-trail span{display:block;font-size:12px;color:var(--dd-muted);margin-top:7px}
+.dice-duel .story-reveal.panel{max-width:none;text-align:center;border:0;background:transparent;padding:10px 0}
+.dice-duel .dd-reveal-star{display:block;font-size:48px;color:#b28a45}
+.dice-duel .story-reveal h2{font-size:clamp(30px,4vw,42px);margin:7px 0 24px}
+.dice-duel .revealed-cycle{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.dice-duel .revealed-cycle>div{padding:18px 8px;background:#fff8e9;border:1px solid #cbb798;border-radius:12px}
+.dice-duel .revealed-cycle b{font:18px Georgia,serif}
+.dice-duel .revealed-cycle span{font-size:23px;color:#9d7745;margin:0 8px}
+.dice-duel .revealed-cycle small{display:block;font-size:12px;color:var(--dd-muted);margin-top:9px}
+.dice-duel .probability-table{font-size:15px;table-layout:fixed}
+.dice-duel .probability-table th{font-size:13px;overflow-wrap:anywhere}
+.dice-duel .probability-table td{color:#60476a;background:#f1e4ed}
+.dice-duel .probability-table td.advantage{color:#265d46;background:#dcebdd}
+.dice-duel .strategy-experiment.panel{margin:0;padding:10px 0 0;border:0;background:transparent}
+.dice-duel .strategy-heading{align-items:start;gap:16px;flex-wrap:wrap}
+.dice-duel .strategy-heading h3{font-size:28px;margin:6px 0 10px}
+.dice-duel .strategy-commit{font-size:16px;padding:14px;margin:18px 0;border-color:#c6b59e;background:#f4e8d966}
+.dice-duel .strategy-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:650px}
+.dice-duel .strategy-choices>button{padding:16px 10px;border-radius:14px;border:1px solid var(--dd-line);background:#fffaf0;min-width:0}
+.dice-duel .strategy-choices b{font:21px Georgia,serif}
+.dice-duel .strategy-choices span{font-size:12px;color:var(--dd-muted);overflow-wrap:anywhere}
+.dice-duel .strategy-battle{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:16px;padding:20px 10px;background:transparent;border-bottom:1px solid var(--dd-line);border-radius:0}
+.dice-duel .strategy-result p{font:24px Georgia,serif;color:#584160}
+.dice-duel .strategy-result small{font-size:13px;color:var(--dd-muted)}
+.dice-duel .strategy-comparison{margin:18px 0}
+.dice-duel .strategy-comparison>div{background:#fff8e9;border-color:var(--dd-line);padding:18px}
+.dice-duel .strategy-comparison b{font-size:14px}
+.dice-duel .strategy-comparison strong{font-size:28px}
+.dice-duel .strategy-comparison small{font-size:12px;color:var(--dd-muted)}
+.dice-duel .segmented{background:#eddfed;border-color:#cab4ce;flex-wrap:wrap}
+.dice-duel .segmented button{font-size:14px;color:#634e70;padding:10px}
+.dice-duel .segmented button.active{background:#fff7e9;color:#442851}
+.dice-duel .dd-section-switch{margin:0 0 16px;border-bottom:1px solid var(--dd-line)}
+.dice-duel .dd-research-nav{display:flex;gap:10px;padding-bottom:12px}
+.dice-duel .dd-research-nav button{padding:10px 15px;border:1px solid var(--dd-line);border-radius:10px;background:#fff9ee}
+.dice-duel .dd-research-nav button[aria-pressed=true]{background:#e9ddef}
+.dice-duel .dd-research-more{border-top:1px solid var(--dd-line);padding-top:5px;margin-top:18px}
+.dice-duel .mode-intro{margin:12px 0 24px}
+.dice-duel .mode-intro h2{font-size:30px}
+.dice-duel .experiment-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.dice-duel .outcome-grid{grid-template-columns:22px repeat(6,minmax(0,1fr));gap:4px}
+.dice-duel .outcome-grid button{min-height:44px;height:44px;font-size:13px}
+.dice-duel .outcome-grid b{font-size:13px;color:#57405d}
+.dice-duel .outcome-win{background:#d4eadd;color:#205b43}
+.dice-duel .outcome-loss{background:#f5dbe0;color:#8c3349}
+.dice-duel .outcome-tie{background:#e7dfed;color:#5c4c69}
+.dice-duel .grid-legend{font-size:12px;gap:12px;flex-wrap:wrap}
+.dice-duel .formula{font-size:20px;color:#593c70;overflow-wrap:anywhere;background:#ede0f1;border-color:#c9b1d0}
+.dice-duel .note-box{font-size:14px;color:#785729;line-height:1.7}
+.dice-duel .expected-values{flex-wrap:wrap;gap:12px}
+.dice-duel .expected-values span{font-size:14px}
+.dice-duel .expected-values small{font-size:12px;color:var(--dd-muted)}
+.dice-duel .exact-result>span,.dice-duel .best-response b{font-size:14px;color:#62466c}
+.dice-duel .law{grid-template-columns:1fr 1.4fr;gap:24px}
+.dice-duel .dd-adventure-menu{position:relative;flex-shrink:0}
+.dice-duel .dd-adventure-menu>summary{padding:9px 14px;min-height:44px;border:1px solid #bfa8c4;background:#fff8eb;border-radius:12px;list-style:none}
+.dice-duel .dd-menu-content{position:absolute;right:0;top:54px;z-index:30;width:min(520px,calc(100vw - 40px));max-height:70dvh;overflow:auto;background:#fff6e8;border:1px solid #bfa88b;border-radius:16px;padding:20px;box-shadow:0 15px 50px #44304c30}
+.dice-duel .dd-progression{display:grid;grid-template-columns:1fr;gap:5px;margin:12px 0}
+.dice-duel .dd-progression button{display:flex;align-items:center;gap:12px;text-align:left;border-radius:10px;padding:10px;color:#584361;min-width:0}
+.dice-duel .dd-progression button[aria-current]{background:#e9dcf3}
+.dice-duel .dd-progression b{font:19px Georgia,serif}
+.dice-duel .dd-progression small{display:none}
+.dice-duel .dd-step{display:grid;place-items:center;width:30px;height:30px;border:1px solid #baa4bf;border-radius:50%;flex-shrink:0}
+.dice-duel .dd-stage-status{font-size:12px;margin-left:auto}
+.dice-duel .journey-tools{margin:0}
+.dice-duel .discovery-journal{display:block;padding:15px;margin:0}
+.dice-duel .discovery-journal ol{display:grid;grid-template-columns:1fr;gap:12px;margin-top:15px}
+.dice-duel .discovery-journal h2{font-size:23px;white-space:normal}
+.dice-duel .discovery-journal p{font-size:14px}
+.dice-duel .discovery-journal small{font-size:12px;color:var(--dd-muted)}
+.dice-duel .dd-save-tools{border-top:1px solid var(--dd-line);padding-top:14px;margin-top:14px;font-size:13px;color:var(--dd-muted)}
+.dice-duel .dd-reset-confirm{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.dice-duel .dd-intro{width:min(530px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:30px;border:1px solid #bba181;border-radius:24px;background:radial-gradient(ellipse at top,#fff3d5,#f7edf5 65%,#f5e9d4);color:#493150;box-shadow:0 28px 100px #25163b55}
+.dice-duel .dd-intro::backdrop{background:#30223d70;backdrop-filter:blur(5px)}
+.dice-duel .dd-intro-content{text-align:center}
+.dice-duel .dd-intro-symbol{display:block;font-size:62px;color:#a5814c;line-height:1.2;margin:10px}
+.dice-duel .dd-intro-place{font-size:13px;color:#7b5b82}
+.dice-duel .dd-intro h2{font-size:30px;margin:16px 0}
+.dice-duel .dd-intro p{font-size:17px}
+.dice-duel .dd-intro-hint{font-size:14px;padding:12px;background:#fff6df;border-radius:10px;margin:18px 0}
+.dice-duel .dd-intro-dots{display:flex;gap:8px;justify-content:center;margin:20px 0}
+.dice-duel .dd-intro-dots span{width:8px;height:8px;background:#d1bedb;border-radius:50%}
+.dice-duel .dd-intro-dots .active{width:24px;border-radius:8px;background:#8e65ac}
+.dice-duel .dd-intro-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dice-duel .dd-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:760px){
+ .dice-duel .dd-stage{padding:20px;min-height:540px;border-radius:20px}
+ .dice-duel .dd-chapter-trail{gap:18px}
+ .dice-duel .keeper{gap:10px}
+ .dice-duel .keeper-avatar{width:66px}
+ .dice-duel .keeper-speech{padding:12px 15px}
+ .dice-duel .keeper-speech p{font-size:17px}
+ .dice-duel .keeper-speech .step-label{font-size:10px}
+ .dice-duel .experiment-grid,.dice-duel .law{grid-template-columns:1fr}
+ .dice-duel .revealed-cycle{grid-template-columns:1fr;gap:9px}
+ .dice-duel .revealed-cycle>div{padding:12px}
+ .dice-duel .strategy-battle{grid-template-columns:1fr 1fr}
+ .dice-duel .strategy-result{grid-column:1/-1;grid-row:2}
+ .dice-duel .evidence-trail section>div{grid-template-columns:1fr}
+}
+@media(max-width:540px){
+ .dice-duel{padding-top:4px}
+ .dice-duel .dd-focus-header{align-items:flex-start;gap:10px}
+ .dice-duel .dd-focus-header h1{font-size:30px}
+ .dice-duel .dd-focus-header .eyebrow{font-size:11px;letter-spacing:0}
+ .dice-duel .dd-adventure-menu>summary{font-size:12px;padding:9px 10px}
+ .dice-duel .dd-chapter-trail{font-size:11px;gap:16px;margin:12px 0 16px}
+ .dice-duel .dd-stage{padding:16px 13px}
+ .dice-duel .keeper{align-items:start;gap:8px;min-height:105px;margin-bottom:16px}
+ .dice-duel .keeper-avatar{width:53px}
+ .dice-duel .character-caption{display:none}
+ .dice-duel .keeper-speech{padding:11px 12px}
+ .dice-duel .keeper-speech p{font-size:16px;line-height:1.5}
+ .dice-duel .keeper-speech .step-label{font-size:9px}
+ .dice-duel .dd-scene-heading h2{font-size:25px}
+ .dice-duel .dd-scene-heading p{font-size:13px}
+ .dice-duel .dd-die-browser{gap:5px}
+ .dice-duel .dd-browse-arrow{width:44px;height:44px}
+ .dice-duel .dd-inspect{min-height:315px}
+ .dice-duel .dd-inspect::before{width:180px;height:62px}
+ .dice-duel .dd-cube-view{width:150px}
+ .dice-duel .dd-inspect small{font-size:11px}
+ .dice-duel .dd-face-values{gap:4px}
+ .dice-duel .dd-face-values span{width:25px;height:29px;font-size:14px}
+ .dice-duel .dd-mystery{width:150px;height:205px}
+ .dice-duel .dd-mystery b{font-size:21px}
+ .dice-duel .dd-choose{padding:11px 14px}
+ .dice-duel .battle.panel{grid-template-columns:1fr 1fr;gap:12px;padding:14px 0}
+ .dice-duel .battle-center{grid-row:2;grid-column:1/-1}
+ .dice-duel .battle-die{font-size:12px}
+ .dice-duel .battle-die .eyebrow{font-size:11px}
+ .dice-duel .battle-die .die-visual{margin:18px auto 10px;scale:.85}
+ .dice-duel .versus{display:none}
+ .dice-duel .result{font-size:25px;min-height:45px;padding:5px 0}
+ .dice-duel .dd-next-step{padding:16px 0 0}
+ .dice-duel .dd-next-step>p{font-size:14px}
+ .dice-duel .dd-actions{gap:8px;flex-direction:column}
+ .dice-duel .dd-actions .primary{width:100%;font-size:14px;padding:12px}
+ .dice-duel .stats{grid-template-columns:repeat(2,1fr);gap:14px}
+ .dice-duel .hunch-choices{grid-template-columns:1fr;gap:10px;margin:20px auto}
+ .dice-duel .hunch-choices button{font-size:17px;padding:17px;min-height:56px}
+ .dice-duel .chart{height:210px;margin-left:-13px;margin-right:-8px}
+ .dice-duel .dd-chart-key{gap:12px;font-size:11px}
+ .dice-duel .watch-readout{font-size:12px;gap:10px}
+ .dice-duel .dd-experiment-dice{gap:24px}
+ .dice-duel .strategy-choices{gap:7px}
+ .dice-duel .strategy-choices>button{padding:12px 4px}
+ .dice-duel .strategy-choices b{font-size:17px}
+ .dice-duel .strategy-choices span{font-size:11px}
+ .dice-duel .strategy-choices .die-visual.small{scale:.8;width:75px;margin:0}
+ .dice-duel .strategy-heading h3{font-size:25px}
+ .dice-duel .strategy-battle{padding:16px 0;gap:10px}
+ .dice-duel .strategy-result p{font-size:22px}
+ .dice-duel .strategy-comparison{gap:8px}
+ .dice-duel .strategy-comparison>div{padding:12px 6px}
+ .dice-duel .strategy-comparison small{font-size:11px}
+ .dice-duel .dd-menu-content{position:fixed;top:95px;left:16px;right:16px;width:auto;max-height:75dvh}
+ .dice-duel .dd-research-nav{flex-direction:column}
+ .dice-duel .panel{padding:16px}
+ .dice-duel .dd-intro{padding:24px}
+ .dice-duel .dd-intro h2{font-size:27px}
+ .dice-duel .dd-intro-actions{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){.dice-duel *,.dice-duel *::before,.dice-duel *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
