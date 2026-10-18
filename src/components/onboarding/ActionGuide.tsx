@@ -6,7 +6,7 @@ const KEY='mindplay.action-guide.v1';
 const steps={
  island:{number:1,title:'Your adventure starts here',body:'Click Play Dice Duel on Curious Island to meet the Keeper.'},
  unseal:{number:2,title:'Unseal a mysterious die',body:'Tap the sealed die to reveal its faces. You can browse the other dice, too.'},
- choose:{number:3,title:'Choose your companion',body:'Hover, swipe or tap the die to turn it. Then choose this die when you’re ready.'},
+ choose:{number:3,title:'Choose your companion',body:'Drag, tap or use arrow keys to turn the die. Then choose this die when you’re ready.'},
  roll:{number:4,title:'Begin your first duel',body:'Click Begin the Duel. The higher roll wins. Watch what happens when the Keeper chooses after you.'},
  investigate:{number:5,title:'Follow your curiosity',body:'Follow the investigation button to take your question to the experiment table.'},
  hunch:{number:6,title:'What do you think?',body:'Choose a prediction. Any hunch is a good starting point—you can change your mind later.'},
