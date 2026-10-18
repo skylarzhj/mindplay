@@ -231,3 +231,10 @@
 .dice-duel .evidence-trail section>div>div{padding:14px;border-radius:12px;display:flex;flex-direction:column;border:1px solid #b9a0bf}
 @media(max-width:600px){.dice-duel .dd-focus-header{align-items:flex-start}.dice-duel .dd-focus-header h1{font-size:32px}.dice-duel .dd-adventure-menu>summary{font-size:14px;padding:8px 10px}.dice-duel .dd-die-browser{gap:10px}.dice-duel .dd-browse-arrow{width:44px;height:44px}.dice-duel .dd-inspect .dd-cube-view{width:150px;height:155px;scale:1}.dice-duel .dd-inspect{min-height:300px}.dice-duel .dd-menu-content{position:fixed;top:120px;left:20px;right:20px;width:auto}.dice-duel .evidence-trail section>div{grid-template-columns:1fr}}
 .dice-duel .dd-cube,.dice-duel .dd-cube-face{pointer-events:none}
+
+/* Keep the next chapter visible beside the completed duel, even without the guide. */
+.dice-duel .dd-next-action{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px;width:100%}
+.dice-duel .dd-next-action .step-label{font-size:11px;letter-spacing:1.4px;color:#78518c}
+.dice-duel .dd-next-action p{font-size:15px;line-height:1.6;color:var(--dd-muted);margin:0;max-width:30ch}
+.dice-duel .dd-next-action .primary{width:100%;justify-content:center;white-space:normal;line-height:1.4}
+.dice-duel .dd-next-action .secondary{font-size:14px;min-height:44px}
