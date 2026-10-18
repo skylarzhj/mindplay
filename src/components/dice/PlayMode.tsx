@@ -62,7 +62,7 @@ export function PlayMode({onInvestigate, onChoice, onRound}: Props) {
           <div aria-live="polite" className={`result ${game.result?.outcome || ''}`}>
             {game.rolling ? 'The dice are dancing…' : game.result ? game.result.outcome === 'win' ? 'You win!' : game.result.outcome === 'loss' ? 'The Keeper wins.' : 'A perfect tie.' : 'Ready to try your luck?'}
           </div>
-          {!game.result && <button className="primary" disabled={game.rolling} onClick={game.roll}>
+          {!game.result && <button data-guide="roll" className="primary" disabled={game.rolling} onClick={game.roll}>
             {game.rolling ? 'Rolling…' : 'Begin the Duel'} <ArrowRight size={17}/>
           </button>}
         </div>
@@ -75,7 +75,7 @@ export function PlayMode({onInvestigate, onChoice, onRound}: Props) {
       {game.result && <div className="dd-next-step">
         <p>A lucky roll is one clue. What happens over many duels?</p>
         <div className="dd-actions">
-          <button className="primary" onClick={onInvestigate}>Investigate this matchup <ArrowRight size={17}/></button>
+          <button data-guide="investigate" className="primary" onClick={onInvestigate}>Investigate this matchup <ArrowRight size={17}/></button>
           <button className="text-button" onClick={game.roll}>Roll Again</button>
         </div>
       </div>}

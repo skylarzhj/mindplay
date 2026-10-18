@@ -10,7 +10,7 @@ export function InspectDie({die, onChoose}: {die: Die; onChoose: () => void}) {
   const dragged = useRef(false);
 
   return <div className={`dd-inspect ${revealed ? 'is-revealed' : ''}`} style={{'--die': die.color} as CSSProperties}>
-    {!revealed ? <button className="dd-mystery" onClick={() => setRevealed(true)} aria-label="Unseal mysterious die">
+    {!revealed ? <button data-guide="unseal" className="dd-mystery" onClick={() => setRevealed(true)} aria-label="Unseal mysterious die">
       <span aria-hidden="true">✧</span><b>A little mystery</b><small>Tap to unseal your die</small>
     </button> : <>
       <div className="dd-cube-controls">
@@ -51,7 +51,7 @@ export function InspectDie({die, onChoose}: {die: Die; onChoose: () => void}) {
         {die.faces.map((value, index) => <span key={index} className={face === index ? 'current' : ''} aria-hidden="true">{value}</span>)}
       </div>
       <small>Tap or drag to turn · every face is equally likely</small>
-      <button className="primary dd-choose" onClick={onChoose}>Choose {die.name} →</button>
+      <button data-guide="choose" className="primary dd-choose" onClick={onChoose}>Choose {die.name} →</button>
     </>}
   </div>;
 }

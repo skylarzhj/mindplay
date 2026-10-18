@@ -67,7 +67,7 @@ export function ExploreMode({onQuant, journey, onHypothesis, onExperiment}: Prop
     <Keeper mood={!showWorkshop ? 'celebrating' : busy ? 'anticipating' : 'thinking'}><p>{keeper}</p></Keeper>
     {showWorkshop && (!hypothesis ? <section className="hunch-scene">
       <div className="dd-scene-heading"><h2>What’s your hunch?</h2><p>Pick a prediction. The experiment comes next.</p></div>
-      <div className="hunch-choices">
+      <div data-guide="hunch" className="hunch-choices">
         {DICE.map(die => <button className="secondary" key={die.id} onClick={() => predict(die.id)}>
           <span style={{color: die.color}} aria-hidden="true">✦</span> {die.name} is strongest
         </button>)}
@@ -102,7 +102,7 @@ export function ExploreMode({onQuant, journey, onHypothesis, onExperiment}: Prop
           <span>Observed <b>{pct(result.wins / result.trials)}</b></span><span>Exact chance {pct(calculateWinProbability(a, b))}</span>
         </>}</div>
         <div className="dd-actions">
-          <button className="primary" disabled={busy} onClick={() => result && nextPair && !discovered ? run(nextPair[0], nextPair[1]) : run()}>
+          <button data-guide={!discovered && (busy ? pairs.size > 0 : Boolean(result && nextPair)) ? "next" : "experiment"} className="primary" disabled={busy} onClick={() => result && nextPair && !discovered ? run(nextPair[0], nextPair[1]) : run()}>
             {busy ? 'Watching the dice…' : result && nextPair && !discovered ? 'Watch a Different Matchup' : result ? 'Run Again' : 'Run the Experiment'} <ArrowRight size={17}/>
           </button>
         </div>
@@ -135,7 +135,7 @@ export function ExploreMode({onQuant, journey, onHypothesis, onExperiment}: Prop
       </div>)}</div>
       <p className="small-text">Each die has an edge over one rival and a weakness against another. Exact outcome counting confirms the loop—even when a short experiment disagrees.</p>
       <div className="dd-actions">
-        <button className="primary" onClick={onQuant}>Enter the Strategy Challenge <ArrowRight size={17}/></button>
+        <button data-guide="strategy" className="primary" onClick={onQuant}>Enter the Strategy Challenge <ArrowRight size={17}/></button>
         <button className="text-button" onClick={() => { if (!hypothesis) predict('none'); setReplaying(true); }}>Keep experimenting</button>
       </div>
       <details className="quiet-details"><summary>Compare every exact matchup</summary>
