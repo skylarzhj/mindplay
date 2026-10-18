@@ -88,7 +88,7 @@ export function PlayMode({onInvestigate, onChoice, onRound}: Props) {
           <div><strong>{game.history.length - wins - losses}</strong><span>Ties</span></div>
           <div><strong>{game.history.length ? `${(wins / game.history.length * 100).toFixed(1)}%` : '—'}</strong><span>Your win rate</span></div>
         </div>
-        <button className="text-button" disabled={game.rolling} onClick={() => game.choose(game.selected!)}><RotateCcw size={15}/> Reset this matchup</button>
+        <button className="text-button" disabled={game.rolling} onClick={() => {if(window.confirm("Reset this matchup and clear its duel record?"))game.choose(game.selected!);}}><RotateCcw size={15}/> Reset this matchup</button>
       </details>
     </>}
   </>;

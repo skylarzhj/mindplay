@@ -1,48 +1,52 @@
 import {useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 import './action-guide.css';
-import {guidePosition} from './guidePosition';
-const KEY='mindplay.action-guide.v1';
-const steps={
- island:{number:1,title:'Your adventure starts here',body:'Click Play Dice Duel on Curious Island to meet the Keeper.'},
- unseal:{number:2,title:'Unseal a mysterious die',body:'Tap the sealed die to reveal its faces. You can browse the other dice, too.'},
- choose:{number:3,title:'Choose your companion',body:'Drag, tap or use arrow keys to turn the die. Then choose this die when you’re ready.'},
- roll:{number:4,title:'Begin your first duel',body:'Click Begin the Duel. The higher roll wins. Watch what happens when the Keeper chooses after you.'},
- investigate:{number:5,title:'Follow your curiosity',body:'Follow the investigation button to take your question to the experiment table.'},
- hunch:{number:6,title:'What do you think?',body:'Choose a prediction. Any hunch is a good starting point—you can change your mind later.'},
- experiment:{number:7,title:'Test your hunch',body:'Click Run the Experiment to watch many independent rolls and see a pattern emerge.'},
- next:{number:8,title:'Collect all three clues',body:'Click Watch a Different Matchup. Repeat until you’ve tested all three pairs of dice.'},
- strategy:{number:9,title:'Put your discovery to work',body:'You found the loop! Click Enter the Strategy Challenge to try choosing after the Keeper.'},
-} as const;
-type Step=keyof typeof steps;
-type Anchor={id:Step;top:number;left:number;width:number;height:number};
-export function ActionGuide({run,page}:{run:number;page:string}){
- const [active,setActive]=useState(()=>{try{return localStorage.getItem(KEY)!=='seen';}catch{return true;}});
- const [anchor,setAnchor]=useState<Anchor|null>(null),[position,setPosition]=useState({top:0,left:0,ready:false});
- const card=useRef<HTMLElement>(null);
- function finish(){setActive(false);setAnchor(null);try{localStorage.setItem(KEY,'seen');}catch{/* Works for this visit when storage is unavailable. */}}
- useEffect(()=>{if(run>0)setActive(true);},[run]);
+import {guidePosition,type GuideRect} from './guidePosition';
+import {guideKey,guideSteps,type GuidePage} from './guideSteps';
+function wasSeen(page:GuidePage){try{return localStorage.getItem(guideKey(page))==='seen';}catch{return false;}}
+export function ActionGuide({run,page,suspended=false}:{run:number;page:GuidePage;suspended?:boolean}){
+ // A separate instance per page means replay and completion never carry step numbers across islands.
+ return <PageGuide key={page} run={run} page={page} suspended={suspended}/>;
+}
+function PageGuide({run,page,suspended}:{run:number;page:GuidePage;suspended:boolean}){
+ const [active,setActive]=useState(()=>!wasSeen(page)),[index,setIndex]=useState(0);
+ const [anchor,setAnchor]=useState<GuideRect|null>(null),[position,setPosition]=useState({top:16,left:16,ready:false});
+ const card=useRef<HTMLElement>(null),previousRun=useRef(run),steps=guideSteps[page],step=steps[index];
+ function finish(){setActive(false);try{localStorage.setItem(guideKey(page),'seen');}catch{/* Still works without device storage. */}}
+ useEffect(()=>{if(run!==previousRun.current){previousRun.current=run;setIndex(0);setActive(true);}},[run]);
  useEffect(()=>{
-  if(!active)return;
+  if(!active||suspended)return;
+  const shell=document.querySelector<HTMLElement>('.site-shell');
+  const previousFocus=document.activeElement instanceof HTMLElement?document.activeElement:null;
+  if(shell)shell.inert=true;
+  card.current?.querySelector('button')?.focus({preventScroll:true});
   let frame=0,last:HTMLElement|null=null;
   function track(){
-   const target=Array.from(document.querySelectorAll<HTMLElement>('[data-guide]')).find(el=>!el.closest('[hidden]')&&el.getClientRects().length>0);
-   if(!target){setAnchor(a=>a===null?a:null);last=null;frame=requestAnimationFrame(track);return;}
-   if(target!==last){last=target;const r=target.getBoundingClientRect();if(r.top<24||r.bottom>innerHeight-24)target.scrollIntoView({block:'center',behavior:'auto'});}
-   const r=target.getBoundingClientRect(),id=target.dataset.guide as Step;
-   const next={id,top:Math.round(r.top),left:Math.round(r.left),width:Math.round(r.width),height:Math.round(r.height)};
-   setAnchor(a=>a&&Object.keys(next).every(k=>a[k as keyof Anchor]===next[k as keyof Anchor])?a:next);
-   const pos=guidePosition(next,{width:card.current?.offsetWidth??310,height:card.current?.offsetHeight??220},{width:innerWidth,height:innerHeight});
+   const visible=(el:HTMLElement)=>!el.closest('[hidden]')&&el.getClientRects().length>0;
+   const root=document.querySelector<HTMLElement>(page==='home'?'.home':page==='duel'?'.dice-duel':'.horse-page');
+   const target=Array.from(root?.querySelectorAll<HTMLElement>(step.target)??[]).find(visible)??root;
+   if(!target||!visible(target)){setAnchor(null);frame=requestAnimationFrame(track);return;}
+   if(target!==last){last=target;target.scrollIntoView({block:'center',behavior:'instant'});}
+   const r=target.getBoundingClientRect();
+   const next={top:Math.round(r.top),left:Math.round(r.left),width:Math.round(r.width),height:Math.round(r.height)};
+   setAnchor(a=>a&&a.top===next.top&&a.left===next.left&&a.width===next.width&&a.height===next.height?a:next);
+   const pos=guidePosition(next,{width:card.current?.offsetWidth??310,height:card.current?.offsetHeight??300},{width:innerWidth,height:innerHeight});
    setPosition(p=>p.left===pos.left&&p.top===pos.top&&p.ready?p:pos);
    frame=requestAnimationFrame(track);
   }
   frame=requestAnimationFrame(track);
-  const escape=(e:KeyboardEvent)=>{if(e.key==='Escape')finish();};
-  const complete=(e:MouseEvent)=>{if((e.target as Element).closest('[data-guide="strategy"]'))finish();};
-  document.addEventListener('keydown',escape);document.addEventListener('click',complete);
-  return()=>{cancelAnimationFrame(frame);document.removeEventListener('keydown',escape);document.removeEventListener('click',complete);};
- },[active,page]);
- if(!active||!anchor||!position.ready)return null;
- const step=steps[anchor.id];
- return createPortal(<div className="action-guide-layer"><div className="action-guide-spotlight" aria-hidden="true" style={{top:anchor.top-6,left:anchor.left-6,width:anchor.width+12,height:anchor.height+12}}/><aside ref={card} className="action-guide-card" style={{top:position.top,left:position.left}} aria-label="Step-by-step guide"><div aria-live="polite" aria-atomic="true"><span className="action-guide-count">YOUR ADVENTURE · {step.number} / 9</span><h2>{step.title}</h2><p>{step.body}</p></div><div className="action-guide-footer"><span>✧ Follow the highlighted control</span><button onClick={finish}>Skip guide</button></div></aside></div>,document.body);
+  const escape=(e:KeyboardEvent)=>{
+   if(e.key==='Escape')finish();
+   if(e.key==='Tab'){
+    const buttons=Array.from(card.current?.querySelectorAll<HTMLButtonElement>('button')??[]);
+    const first=buttons[0],last=buttons.at(-1);
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}
+   }
+  };
+  document.addEventListener('keydown',escape);
+  return()=>{cancelAnimationFrame(frame);document.removeEventListener('keydown',escape);if(shell)shell.inert=false;if(previousFocus?.isConnected)previousFocus.focus({preventScroll:true});};
+ },[active,page,index,suspended,step.target]);
+ if(!active||suspended)return null;
+ return createPortal(<div className="action-guide-layer"><div className="action-guide-shield"/>{anchor&&<div className="action-guide-spotlight" aria-hidden="true" style={{top:anchor.top-6,left:anchor.left-6,width:anchor.width+12,height:anchor.height+12}}/>}<aside ref={card} className="action-guide-card" style={{top:position.top,left:position.left}} role="dialog" aria-modal="true" aria-label={`${page==='home'?'Homepage':page==='duel'?'Dice Duel':'Royal Races'} guide`}><div aria-live="polite" aria-atomic="true"><span className="action-guide-count">{page==='home'?'WORLD MAP':page==='duel'?'DICE DUEL':'ROYAL RACES'} · {index+1} / {steps.length}</span><h2>{step.title}</h2><p>{step.body}</p></div><div className="action-guide-footer"><button onClick={finish}>Skip</button><div className="action-guide-controls">{index>0&&<button onClick={()=>setIndex(i=>i-1)}>Back</button>}<button className="secondary" onClick={()=>index===steps.length-1?finish():setIndex(i=>i+1)}>{index===steps.length-1?'Done':'Next'}</button></div></div></aside></div>,document.body);
 }
